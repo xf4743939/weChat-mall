@@ -1,0 +1,21 @@
+<view class="container">
+    <view class="main-list" wx:for="{{shopList}}" wx:key="{{item.id}}" bindtap="link" data-id="{{item.id}}">
+        <view class="l">
+            <view class="name">{{item.shopName}}
+                <text wx:if="{{item.raill != -1}}">{{item.raill}}KM</text>
+            </view>
+            <view class="phone">
+                <i class="icon-tubiao210"></i>
+                {{item.telephone}}
+            </view>
+            <view class="address">
+                <i class="icon-address"></i>
+                {{item.shopAddress}}
+            </view>
+        </view>
+        <view class="m"></view>
+        <view class="r">
+            <image src="{{item.shopImage}}" mode="aspectFit"></image>
+        </view>
+    </view>
+</view>

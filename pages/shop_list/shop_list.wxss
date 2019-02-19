@@ -1,0 +1,80 @@
+.container {
+  min-height: 100%;
+}
+
+.main-list {
+  height: 190rpx;
+  font-size: 24rpx;
+  border-bottom: 2rpx solid #f5f5f9;
+  padding-top: 18rpx;
+  background-color: #fff;
+}
+
+.main-list .l {
+  width: 490rpx;
+  display: inline-block;
+  margin-left: 25rpx;
+  vertical-align: middle;
+}
+
+.main-list .l text {
+  width: 450rpx;
+  display: inline-block;
+}
+
+.main-list .l .name {
+  font-size: 27rpx;
+  margin-bottom: 4px;
+  position: relative;
+}
+
+.main-list .l .name text {
+  position: absolute;
+  right: 0;
+  top: 29rpx;
+  text-align: right;
+  font-size: 20rpx;
+}
+
+.main-list .l .phone,
+.main-list .l .address {
+  line-height: 40rpx;
+}
+
+.main-list .l .phone i {
+  width: 26rpx;
+  height: 27rpx;
+
+  margin-top: 9rpx;
+  margin-right: 10rpx;
+}
+
+.main-list .l .address {
+  display: flex;
+
+}
+
+.main-list .l .address i {
+  display: inline-flex;
+  margin-right: 10rpx;
+}
+
+.main-list .m {
+  width: 2rpx;
+  height: 90rpx;
+  background-color: #dfdfdd;
+  display: inline-block;
+  margin-left: 29rpx;
+  margin-right: 39rpx;
+  vertical-align: middle;
+}
+
+.main-list .r {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.main-list .r image {
+  width: 154rpx;
+  height: 154rpx;
+}
