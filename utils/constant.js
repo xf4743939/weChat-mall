@@ -1,4 +1,4 @@
-const http = 'https://nbmall.deeptel.com.cn';
+const http = 'https://mall.deeptel.com.cn';
 
 const baseImgUrl = 'http://maint.deeptel.com.cn/upload/';
 
