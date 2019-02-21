@@ -1,0 +1,5 @@
+<view class="head-container">
+    <image class="img" src="{{shop.shopImage}}"></image>
+    <view class="shop-name text-overflow font-24">{{shop.shopName}}</view>
+    <view class="btn font-24" bindtap="change">[切换店铺]</view>
+</view>

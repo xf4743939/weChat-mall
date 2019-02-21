@@ -1,0 +1,35 @@
+.banner-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.search-box {
+    position: absolute;
+    left: 30rpx;
+    top: 10rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 690rpx;
+    height: 56rpx;
+    border-radius: 45rpx;
+    z-index: 2;
+}
+
+.search {
+    width: 100%;
+    height: 100%;
+    caret-color: aqua;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.banner {
+    height: 380rpx;
+}
+
+.slide-image {
+    width: 750rpx;
+    height: 380rpx;
+}

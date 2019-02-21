@@ -11,7 +11,7 @@ function request(url, data, method = "GET") {
             'Content-Type': method == 'GET' ? 'application/json' : 'application/x-www-form-urlencoded'
         }
         wx.showLoading({
-            title: '加载中...'
+            title: '加载中'
         })
         wx.request({
             url: url,

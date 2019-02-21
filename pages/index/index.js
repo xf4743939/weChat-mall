@@ -1,54 +1,126 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+const utils = require("../../utils/util.js");
+const ajax = require("../../utils/request.js");
+const api = require("../../utils/constant.js");
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    shop: null,
+    memberId: wx.getStorageSync('memberId') || "",
+    contentList: [], //展示的数据
+    hasMoreData: true, //是否还有数据
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  currentPage: 1,
+  pageSize: 0,
+  pageId: 0,
+  couponId: 0,
+  allData: [], //总数据
+
+  onLoad: function () {
+    this.initData();
+  },
+  onShow() {
+
+  },
+  initData() {
+    this.pageId = wx.getStorageSync("pageId") || 0;
+    this.getPageIndexNew();
+    this.getShopList();
+  },
+  // 获取店家店铺集合
+  getShopList() {
+    let that = this;
+    ajax.request(api.getShopList, {
+      userId: app.globalData.busId,
+      longitude: wx.getStorageSync('longitude'),
+      latitude: wx.getStorageSync('latitude'),
+    }).then(res => {
+      if (!utils.showMsg(res)) return;
+      if (res.data && res.data.length == 0) return;
+      let shopId = wx.getStorageSync('shopId') || "";
+      let currentShop = res.data.find(x => x.id == shopId);
+      that.setData({
+        shop: currentShop
+      })
+    }).catch(err => {
+      utils.showErrMsg(err)
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
+  //获取商城首页全部数据
+  getPageIndexNew() {
+    const that = this;
+    ajax.request(api.pageIndexNew, {
+      pageId: that.pageId,
+      memberId: wx.getStorageSync('memberId') || ""
+    }).then(res => {
+      if (!utils.showMsg(res)) return;
+      debugger
+      let data = res.data;
+      if (!data.dataJson || !data.dataJson.length) return;
+      if (!data.picJson || !data.picJson.length) return;
+      //商品对应的样式
+      //商品信息
+      JSON.parse(data.picJson).forEach((item, i) => {
+        JSON.parse(data.dataJson).forEach((data, j) => {
+          if (i = j && item.hasOwnProperty("type")) {
+            let newData = {
+              pCss: data,
+              type: item.type,
+              pData: item
+            }
+            that.allData.push(newData)
+          }
         })
+      });
+      that.pageSize = Math.ceil(that.allData.length / 10); //计算总页数
+      that.getShowProducts();
+    }).catch(err => {
+      utils.showErrMsg(err)
+    })
+  },
+  //获取首页显示的数据
+  getShowProducts() {
+    debugger
+    const that = this;
+    let page = that.currentPage;
+    let lists = []
+    for (let i = (page - 1) * 10; i < (page * 10); i++) {
+      let item = that.allData[i];
+      if (item) {
+        lists.push(item)
       }
+    }
+    //当前页和总页数做对比
+    if (page < that.pageSize) {
+      this.setData({
+        contentList: [...that.data.contentList, ...lists],
+        hasMoreData: true,
+      })
+      that.currentPage++;
     } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
+      this.setData({
+        contentList: [...that.data.contentList, ...lists],
+        hasMoreData: false
       })
     }
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+  /* 
+   * 页面相关处理函数--监听用户下拉动作
+   */
+  onPullDownRefreash: function () {
+    this.currentPage = 1;
+    this.getPageIndexNew();
+  },
+  /* 
+   *页面上拉触底事件处理函数
+   */
+  onReachBottom: function () {
+    if (this.data.hasMoreData) {
+      this.getShowProducts();
+    }
   }
+
+
 })

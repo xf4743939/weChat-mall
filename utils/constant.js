@@ -6,10 +6,11 @@ const baseImgUrl = 'http://maint.deeptel.com.cn/upload/';
 const getShopList = http + `/pageApplet/79B4DE7C/getShopList`;
 // 获取店铺首页的id
 const getHomePageId = http + `/pageApplet/79B4DE7C/getHomePageId`
-
-
+//获取自定义首页的数据
+const pageIndexNew = http + `/mallApplet/79B4DE7C/pageIndexNew`
 
 module.exports = {
     getShopList,
-    getHomePageId
+    getHomePageId,
+    pageIndexNew
 }

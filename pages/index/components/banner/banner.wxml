@@ -1,0 +1,13 @@
+<view class="banner-container">
+    <view class="search-box">
+        <icon type="search" class="search-icon" size="16" style="color:#999" />
+        <input type="text" class="search" placeholder="搜索商品" bindtap="enterSearch" disabled />
+    </view>
+    <swiper class="banner">
+        <block wx:for="{{imgs}}" wx:key="{{index}}" wx:for-item="img">
+            <swiper-item class="item">
+                <image src="{{img.imageUrl}}" class="slide-image" mode="aspectFill" />
+            </swiper-item>
+        </block>
+    </swiper>
+</view>
