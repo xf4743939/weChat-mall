@@ -5,7 +5,7 @@
     "pages/classify/classify",
     "pages/shopCart/shopCart",
     "pages/my/my",
-    "pages/logs/logs"
+    "pages/search/search"
   ],
   "tabBar": {
     "color": "#7c8085",
@@ -39,7 +39,7 @@
     ]
   },
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#373a41",
     "navigationBarTitleText": "多粉商城简化版",
     "navigationBarTextStyle": "white"

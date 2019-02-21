@@ -1,6 +1,6 @@
 <view class="home-container">
     <header wx:if="{{shop}}" shop="{{shop}}"></header>
-    <block wx:for="{{Lists}}" wx:key="{{index}}">
-        <banner wx:if="{{item.type==2}}" data="{{item}}"></banner>
+    <block wx:if="{{contentList}}" wx:for="{{contentList}}" wx:key="{{index}}">
+        <banner wx:if="{{item.type==2}}" bannerData="{{item}}"></banner>
     </block>
 </view>

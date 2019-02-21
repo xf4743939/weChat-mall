@@ -17,15 +17,28 @@ Page({
   pageId: 0,
   couponId: 0,
   allData: [], //总数据
-
   onLoad: function () {
     this.initData();
   },
   onShow() {
+    let shopId = wx.getStorageSync('shopId') || 0;
+    // 判断店铺有没有变化
 
+    if (this.data.shop && this.data.shop.id != shopId) {
+      this.data.contentList = [];
+      this.data.hasMoreData = true; //是否还有数据
+      this.initData()
+    }
   },
   initData() {
     this.pageId = wx.getStorageSync("pageId") || 0;
+    if (this.pageId == 0) {
+      utils.wx.showToast({
+        title: '只显示自定义首页,请切换店铺',
+        icon: 'none'
+      })
+      return
+    }
     this.getPageIndexNew();
     this.getShopList();
   },
@@ -51,38 +64,43 @@ Page({
   //获取商城首页全部数据
   getPageIndexNew() {
     const that = this;
+    let alldata = [];
     ajax.request(api.pageIndexNew, {
       pageId: that.pageId,
       memberId: wx.getStorageSync('memberId') || ""
     }).then(res => {
       if (!utils.showMsg(res)) return;
-      debugger
+
       let data = res.data;
+
       if (!data.dataJson || !data.dataJson.length) return;
       if (!data.picJson || !data.picJson.length) return;
       //商品对应的样式
       //商品信息
       JSON.parse(data.picJson).forEach((item, i) => {
+        if (!item) return;
         JSON.parse(data.dataJson).forEach((data, j) => {
-          if (i = j && item.hasOwnProperty("type")) {
+          if (!data) return;
+          if (i = j && item && item.hasOwnProperty("type")) {
             let newData = {
               pCss: data,
               type: item.type,
               pData: item
             }
-            that.allData.push(newData)
+            alldata.push(newData)
           }
         })
       });
+      that.allData = alldata;
       that.pageSize = Math.ceil(that.allData.length / 10); //计算总页数
       that.getShowProducts();
     }).catch(err => {
       utils.showErrMsg(err)
     })
   },
-  //获取首页显示的数据
+  //获取首页分页加载的数据
   getShowProducts() {
-    debugger
+
     const that = this;
     let page = that.currentPage;
     let lists = []
@@ -105,18 +123,25 @@ Page({
         hasMoreData: false
       })
     }
+    console.log(this.data.contentList, "lists")
+    console.log(this.currentPage, 'page')
+    console.log(this.data.hasMoreData, 'has')
   },
   /* 
    * 页面相关处理函数--监听用户下拉动作
    */
-  onPullDownRefreash: function () {
+  onPullDownRefresh() {
+
     this.currentPage = 1;
+    this.allData = [];
     this.getPageIndexNew();
+    wx.stopPullDownRefresh();
   },
   /* 
    *页面上拉触底事件处理函数
    */
   onReachBottom: function () {
+
     if (this.data.hasMoreData) {
       this.getShowProducts();
     }

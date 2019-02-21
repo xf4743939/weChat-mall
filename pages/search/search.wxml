@@ -1,0 +1,28 @@
+<view class="search_container">
+    <view class="header_search flex-b">
+        <text class="text font-26" bindtap="closeSearch">取消</text>
+        <input name="input" type="text" confirm-type="search" bindinput="inputChange" placeholder="输入商品关键字" bindconfirm="onKeywordConfirm"
+            class="input" focus="{{true}}" value="{{keyword}}" placeholder-class="placeholderStyle" />
+        <text class="text font-26" bindtap="search">搜索</text>
+    </view>
+    <!-- <no-data my-class="no-data" wx:if="{{ loadingComplete && !historyKeyword.length && !labelList.length}}"></no-data> -->
+    <view class="no_data flex-c" wx:if="{{loadingComplete && !historyKeyword.length && !labelList.length}}">
+        <i class="icon-zanwushuju"></i>
+        <p class="title">没有找到相关产品</p>
+    </view>
+    <view class="search history_search" wx:if="{{ historyKeyword && historyKeyword.length}}">
+        <view class="top ">
+            <text class="title">历史搜索</text>
+            <i class="icon-shanchu icon_delete" catchtap="clearHistory"></i>
+        </view>
+        <view class="items">
+            <text class="item" bindtap="onKeywordTap" data-keyword="{{item.keyword}}" wx:key="{{index}}" wx:for="{{historyKeyword}}">{{item.keyword}}</text>
+        </view>
+    </view>
+    <view class="search hot_search" wx:if="{{labelList && labelList.length }}">
+        <view class="top"><text class="title">搜索推荐</text></view>
+        <view class="items">
+            <text class="item" bindtap="onKeywordTap" data-keyword="{{item.group_name}}" wx:for="{{labelList}}" wx:key="{{item.group_id}}">{{item.group_name}}</text>
+        </view>
+    </view>
+</view>

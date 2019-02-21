@@ -3,10 +3,11 @@
         <icon type="search" class="search-icon" size="16" style="color:#999" />
         <input type="text" class="search" placeholder="搜索商品" bindtap="enterSearch" disabled />
     </view>
-    <swiper class="banner">
+    <swiper class="banner" indicator-dots="true" indicator-color="rgba(0,0,0,0.3)" indicator-active-color="rgba(233,233,233,0.5)"
+        autoplay="{{autoplay}}" circular="true" interval="{{interval}}" duration="{{duration}}">
         <block wx:for="{{imgs}}" wx:key="{{index}}" wx:for-item="img">
             <swiper-item class="item">
-                <image src="{{img.imageUrl}}" class="slide-image" mode="aspectFill" />
+                <image src="{{img.src}}" class="slide-image" mode="aspectFill" />
             </swiper-item>
         </block>
     </swiper>
