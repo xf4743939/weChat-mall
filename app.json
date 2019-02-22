@@ -1,11 +1,13 @@
 {
   "pages": [
+    "pages/login/login",
     "pages/shop_list/shop_list",
     "pages/index/index",
     "pages/classify/classify",
     "pages/shopCart/shopCart",
     "pages/my/my",
     "pages/search/search"
+
   ],
   "tabBar": {
     "color": "#7c8085",
@@ -46,7 +48,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序获取商家店铺"
+      "desc": "您的位置信息将用于当前小程序订单配送方式的显示"
     }
   },
   "networkTimeout": {

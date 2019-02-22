@@ -18,7 +18,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    if (app.globalData.keyword) {
+      this.setData({
+        keyword: app.globalData.keyword
+      })
+    }
   },
 
   /**
@@ -39,7 +43,17 @@ Page({
     utils.clearActivityStatus();
     wx.navigateBack()
   },
+  //获取历史搜索和推荐搜索
+  getKeyword() {
+    const that = this;
+    ajax.request(api.searchLabel, {
+      shopId: wx.getStorageSync('shopId') || "",
+      busId: app.globalData.busId,
+      memberId: wx.getStorageSync('memberId') || "",
+    })
+  },
+  onKeywordTap(){
 
-
+  }
 
 })

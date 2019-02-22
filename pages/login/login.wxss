@@ -1,0 +1,40 @@
+/* pages/login/login.wxss */
+.header {
+    text-align: center;
+}
+
+.avator {
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 50%;
+    margin-top: 100rpx;
+
+}
+
+.main {
+    margin-top: 30rpx;
+}
+
+.text {
+    color: #000;
+    font-size: 34rpx;
+    font-weight: bold;
+    padding-left: 50rpx;
+
+}
+
+.text2 {
+    font-size: 28rpx;
+    color: #666;
+    margin-top: 20rpx;
+    padding-left: 86rpx;
+
+}
+
+.btn {
+    background: green;
+    color: #fff;
+    width: 660rpx;
+    margin-top: 81rpx;
+
+}

@@ -70,27 +70,23 @@ Page({
       memberId: wx.getStorageSync('memberId') || ""
     }).then(res => {
       if (!utils.showMsg(res)) return;
-
       let data = res.data;
-
-      if (!data.dataJson || !data.dataJson.length) return;
       if (!data.picJson || !data.picJson.length) return;
       //商品对应的样式
       //商品信息
       JSON.parse(data.picJson).forEach((item, i) => {
         if (!item) return;
-        JSON.parse(data.dataJson).forEach((data, j) => {
-          if (!data) return;
-          if (i = j && item && item.hasOwnProperty("type")) {
-            let newData = {
-              pCss: data,
-              type: item.type,
-              pData: item
-            }
-            alldata.push(newData)
-          }
-        })
+        if (item && !item.hasOwnProperty("type")) return;
+        let newData = {
+          type: item.type,
+          pData: item
+        }
+        alldata.push(newData)
       });
+      JSON.parse(data.dataJson).forEach((item, i) => {
+        alldata[i].pCss = item
+      });
+
       that.allData = alldata;
       that.pageSize = Math.ceil(that.allData.length / 10); //计算总页数
       that.getShowProducts();
@@ -134,6 +130,8 @@ Page({
 
     this.currentPage = 1;
     this.allData = [];
+    this.data.contentList = [];
+    
     this.getPageIndexNew();
     wx.stopPullDownRefresh();
   },

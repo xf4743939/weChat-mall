@@ -1,4 +1,6 @@
 const app = getApp();
+const api = require("./constant.js");
+
 
 const formatTime = date => {
   const year = date.getFullYear()
@@ -54,9 +56,119 @@ function clearActivityStatus() {
   app.globalData.keyword = "";
 }
 
+/**
+ *
+ * @param code {string} wx.longin 回传的用户code
+ * @param callback {function} 登录成功以后回调函数
+ * @param result {object} 用户授权后的用户信息
+ */
+function requestInfo(code, callback, result) {
+
+
+  const url = api.auth;
+  // console.log(result)
+  wx.request({
+    url,
+    data: {
+      busId: app.globalData.busId,
+      jsCode: code,
+      appId: app.globalData.appid,
+      rawData: result.rawData,
+      industryCode: app.globalData.style
+    },
+    success(res2) {
+   
+      // console.log(res2)
+      if (res2.data.code === 0) { //开发时关闭注释
+        const data = res2.data.data
+        if (!data) {
+          return
+        }
+        //登录成功
+        wx.setStorageSync('phone', data.member && data.member.phone || ''); //开发时关闭注释
+        wx.setStorageSync('memberId', data.member && data.member.id); //开发时关闭注释 
+        wx.setStorageSync('appid', app.globalData.appid);
+  
+        if (callback) callback(res2)
+      } else {
+        wx.showModal({
+          title: '提示',
+          content: '授权失败!',
+          showCancel: false,
+        })
+      }
+    },
+    fail(err) {
+      console.log(err)
+      wx.showModal({
+        title: '提示',
+        content: '授权失败!',
+        showCancel: false,
+      })
+    }
+  })
+}
+
+/**
+ * @param callback {function} 获取用户信息回调 获取用户
+ * @param result {object}  用户授权的用户信息
+ */
+function login(callback, result) {
+
+  if (wx.getStorageSync('memberId') && callback) {
+    callback()
+  } else {
+
+    wx.login({ //login流程
+      success: function (res) { //登录成功
+        // console.log(res)
+        if (res.code) {
+
+          var code = res.code;
+
+          if (result) {
+            requestInfo(code, callback, result.detail)
+          } else {
+            wx.getSetting({
+              success(res2) {
+                // console.log(res2)
+                // console.log(res2.authSetting['scope.userInfo'])
+                if (res2.authSetting['scope.userInfo']) {
+                  wx.getUserInfo({
+                    success(res3) {
+                      // console.log(res3)
+                      requestInfo(code, callback, res3)
+                    },
+                    fail(err) {
+                      wx.showModal({
+                        title: '提示',
+                        content: '获取用户信息失败！',
+                        showCancel: false
+                      })
+                    }
+                  })
+                }
+              }
+            })
+          }
+        }
+      },
+      fail: function () {
+        wx.showModal({
+          title: '提示',
+          content: '登录失败！',
+          showCancel: false,
+        })
+      }
+    });
+  }
+}
+
+
 module.exports = {
   formatTime: formatTime,
   showErrMsg: showErrMsg,
   showMsg: showMsg,
-  clearActivityStatus: clearActivityStatus
+  clearActivityStatus: clearActivityStatus,
+  login
 }

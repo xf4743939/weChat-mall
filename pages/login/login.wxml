@@ -1,0 +1,15 @@
+<view class="login-container">
+    <view class="header">
+        <image class="avator" src="../../images/user_icon03.jpg" mode="aspectFill"></image>
+    </view>
+    <view class="main">
+        <view class="text">登录后开发者将获取一些权限</view>
+        <view class="text2">
+         
+            获取你的公开信息(昵称、头像等)
+        </view>
+    </view>
+    <view class="btn-warp">
+        <button class='btn' bindgetuserinfo="userInfoHandler" open-type="getUserInfo">微信登录</button>
+    </view>
+</view>

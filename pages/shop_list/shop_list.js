@@ -30,6 +30,8 @@ Page({
         longitude = -1;
       },
       complete: function () {
+        wx.setStorageSync('latitude', latitude);
+        wx.setStorageSync('longitude', longitude);
         that.getShopList(longitude, latitude)
       }
     })

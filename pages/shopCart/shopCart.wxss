@@ -1,1 +1,192 @@
 /* pages/shopCart/shopCart.wxss */
+.top {
+    display: flex;
+    justify-content: space-between;
+    line-height: 44px;
+    border-top: 1px solid #EDEDED;
+    border-bottom: 1px solid #EDEDED;
+    font-size: 14px;
+    padding: 0 16px;
+    align-items: center;
+}
+
+/* *********微信单选多选按钮样式********* */
+.check-wrap {
+    width: 40rpx;
+    height: 40rpx;
+    display: inline-block;
+}
+
+.check-wrap {
+    margin-right: 22rpx;
+}
+
+.check-wrap checkbox {
+    width: 40rpx;
+    height: 40rpx;
+    box-sizing: border-box;
+}
+
+.check-wrap label {
+    width: 40rpx;
+    height: 40rpx;
+    box-sizing: border-box;
+}
+
+
+.check-wrap checkbox .wx-checkbox-input {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+    /* box-sizing: border-box; */
+
+}
+
+.check-wrap checkbox .wx-checkbox-input.wx-checkbox-input-checked {
+    border-color: #fff;
+    background: #e4393c;
+}
+
+.check-wrap checkbox .wx-checkbox-input.wx-checkbox-input-checked::before {
+    width: 40rpx;
+    height: 40rpx;
+    border-radius: 50%;
+
+    line-height: 40rpx;
+    text-align: center;
+    font-size: 24rpx;
+    color: #fff;
+    background: transparent;
+    transform: translate(-50%, -50%) scale(1);
+    -webkit-transform: translate(-50%, -50%) scale(1);
+}
+
+/* **** */
+
+.top .edit-btn {
+    color: #6EA1F5;
+    flex-grow: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+
+
+.list .item {
+    display: flex;
+    border-bottom: 1px solid #EDEDED;
+    padding: 0 0 0 32rpx;
+    height: 118px;
+    align-items: center;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    -webkit-transform: translateX(100rpx);
+    transform: translateX(100rpx);
+    margin-left: -100rpx
+}
+
+.list .item.active {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+}
+
+.list .content {
+    flex-grow: 1;
+    display: flex;
+}
+
+.product-name {
+    margin-top: 16rpx;
+}
+
+.list .content image {
+    flex: 0 0 auto;
+    height: 94px;
+    width: 94px;
+    padding: 10px;
+}
+
+.list .content .text {
+    flex-grow: 1;
+    font-size: 14px;
+}
+
+.list .content .title {
+    height: 44px;
+    overflow: hidden;
+}
+
+.list .content .spec {
+    font-size: 12px;
+    color: #333333;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 24px;
+    max-height: 24px;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
+.list .content .price {
+    display: flex;
+    font-size: 14px;
+    padding-top: 10px;
+}
+
+.list .content .price text:nth-child(1) {
+    color: #ff5f19;
+    flex: 1 0 50%;
+}
+
+.list .content .price text:nth-child(2) {
+    color: #999999;
+    flex: 1 0 50%;
+    text-align: right;
+}
+
+.bottom {
+    display: flex;
+    font-size: 14px;
+}
+
+.bottom .left {
+    display: flex;
+    flex: 1 0 70%;
+    align-items: center;
+}
+
+.bottom .left .text {
+    display: flex;
+    flex: 0 0 50%;
+
+}
+
+.bottom .left .total-price {
+    flex: 0 0 50%;
+    color: #333333;
+    text-align: right;
+}
+
+.bottom .right {
+    flex: 1 0 30%;
+    background: #ff5f19;
+    font-size: 17px;
+    color: #FFFFFF;
+    text-align: center;
+    line-height: 10vh;
+}
+
+
+.del-btn {
+    line-height: 118px;
+    width: 100rpx;
+    background: #ff5f19;
+    font-size: 28rpx;
+    color: #fff;
+    text-align: center;
+}
+
+.prohibit {
+    background: #E5E5E5 !important;
+}

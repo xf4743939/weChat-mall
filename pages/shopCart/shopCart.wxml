@@ -1,2 +1,65 @@
-<!--pages/shopCart/shopCart.wxml-->
-<text>pages/shopCart/shopCart.wxml</text>
+<scroll-view style='height:100vh'>
+    <view class='top' style='height:8vh'>
+        <view class="shop-left">
+            <checkbox-group bindchange="checkedBus" class="check-wrap">
+                <label>
+                    <checkbox class="check" value="{{i.busId}}" checked="{{checkAllStatus}}" />
+                </label>
+            </checkbox-group>
+            <i class="icon-shop icon-dianpu" style="margin-right:10rpx;"></i>
+            <text class="shop-text" bindtap="linkShop">{{currentShop.shopName}}</text>
+            <i class="icon-arrow icon-jiantou-copy"></i>
+        </view>
+        <view class="shop-right" wx:if="{{navType===0 || j.isShowEdit}}" data-shopId="{{j.shopId}}" bindtap="editNum">{{
+            isEdit ? '完成' :
+            '编辑' }}
+        </view>
+    </view>
+    <scroll-view scroll-y class='list' style='height:82vh'>
+
+        <view class='item {{item.isTouchMove ? "active" : "" }}' wx:for="{{productList}}" wx:key="{{item.id}}"
+            data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchmove">
+            <view class='label' bindtap="labelFun" data-id="{{item.id}}">
+                <checkbox-group bindchange="checkedBus" class="check-wrap">
+                    <label>
+                        <checkbox class="check" value="{{i.busId}}" checked="{{checkAllStatus}}" />
+                    </label>
+                </checkbox-group>
+            </view>
+            <view class='content'>
+                <image src='{{item.productImageUrl}}' mode="aspectFill"></image>
+                <view class='text'>
+                    <view class="product-name text-overflow">{{item.productName}}</view>
+                    <view class='spec'>{{item.productSpecifica}} {{item.productNum}}{{item.proUnitName}}</view>
+                    <view class='price'>
+                        <text>¥{{item.productPrice}}</text>
+                    </view>
+                </view>
+            </view>
+            <view class='del-btn' bindtap='delItemFun' data-item="{{item}}">
+                删除
+            </view>
+        </view>
+    </scroll-view>
+    <view class='bottom' style='height:10vh'>
+        <view class='left'>
+            <view class='text'>
+                <checkbox-group bindchange="selectAll" class="check-wrap">
+                    <label class="checkbox">
+                        <checkbox value="{{currentShop.shopId}}" checked="{{currentShop.checked}}" />
+                    </label>
+                </checkbox-group>
+                <text style='padding-left:10px;'>全选</text>
+            </view>
+            <view class='total-price' wx:if="{{!isEdit}}">
+                合计:<text style='color:#ff5f19;margin-right:10px;'>￥{{totalPrice}}</text>
+            </view>
+        </view>
+        <view class='{{totalPrice>0.1?"right":"right prohibit"}}' bindtap="closeFun" wx:if="{{!isEdit}}">
+            结算({{allNums}})
+        </view>
+        <view class='{{totalPrice>0.1?"right":"right prohibit"}}' bindtap="delFun" wx:if="{{isEdit}}">
+            删除
+        </view>
+    </view>
+</scroll-view>
