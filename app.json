@@ -6,7 +6,9 @@
     "pages/classify/classify",
     "pages/shopCart/shopCart",
     "pages/my/my",
-    "pages/search/search"
+    "pages/search/search",
+    "pages/orderDetails/orderDetails",
+    "pages/bindPhone/bindPhone"
 
   ],
   "tabBar": {

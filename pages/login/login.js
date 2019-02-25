@@ -38,8 +38,11 @@ Page({
   userInfoHandler() {
     const that = this;
     utils.login(() => {
+      const phone = wx.getStorageSync('phone') || ""
+      let url = "";
+      url = !phone ? `/pages/bindPhone/bindPhone` : `/pages/shop_list/shop_list`
       wx.navigateTo({
-        url: '/pages/shop_list/shop_list',
+        url: url,
       })
     })
   }

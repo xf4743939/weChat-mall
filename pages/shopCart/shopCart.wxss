@@ -80,9 +80,9 @@
     align-items: center;
     -webkit-transition: all 0.4s;
     transition: all 0.4s;
-    -webkit-transform: translateX(100rpx);
-    transform: translateX(100rpx);
-    margin-left: -100rpx
+    -webkit-transform: translateX(90rpx);
+    transform: translateX(90rpx);
+    margin-left: -90rpx
 }
 
 .list .item.active {
@@ -109,6 +109,7 @@
 .list .content .text {
     flex-grow: 1;
     font-size: 14px;
+    position: relative;
 }
 
 .list .content .title {
@@ -180,7 +181,7 @@
 
 .del-btn {
     line-height: 118px;
-    width: 100rpx;
+    width: 90rpx;
     background: #ff5f19;
     font-size: 28rpx;
     color: #fff;
@@ -190,3 +191,39 @@
 .prohibit {
     background: #E5E5E5 !important;
 }
+
+/*add reduce css */
+.nums {
+    display: flex;
+    position: absolute;
+    right: 100rpx;
+    bottom: 0;
+}
+
+.nums .num {
+    width: 80rpx;
+    height: 60rpx;
+    border: 1px solid #ddd;
+}
+
+.num .number {
+    text-align: center;
+}
+
+.add {
+    width: 80rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    border: 1px solid #ddd;
+}
+
+.reduce {
+    width: 80rpx;
+    height: 60rpx;
+    text-align: center;
+    line-height: 60rpx;
+    border: 1px solid #ddd;
+}
+
+/* *********** */

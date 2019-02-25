@@ -1,16 +1,16 @@
 <scroll-view style='height:100vh'>
     <view class='top' style='height:8vh'>
         <view class="shop-left">
-            <checkbox-group bindchange="checkedBus" class="check-wrap">
+            <checkbox-group bindchange="checkedAll" class="check-wrap">
                 <label>
-                    <checkbox class="check" value="{{i.busId}}" checked="{{checkAllStatus}}" />
+                    <checkbox class="check" value="{{selectAllStatus}}" checked="{{selectAllStatus}}" />
                 </label>
             </checkbox-group>
-            <i class="icon-shop icon-dianpu" style="margin-right:10rpx;"></i>
+            <i class="icon-shop icon-dianpu" style="margin-right:10rpx;margin-left: 10rpx;"></i>
             <text class="shop-text" bindtap="linkShop">{{currentShop.shopName}}</text>
             <i class="icon-arrow icon-jiantou-copy"></i>
         </view>
-        <view class="shop-right" wx:if="{{navType===0 || j.isShowEdit}}" data-shopId="{{j.shopId}}" bindtap="editNum">{{
+        <view class="shop-right" bindtap="editNum">{{
             isEdit ? '完成' :
             '编辑' }}
         </view>
@@ -19,10 +19,10 @@
 
         <view class='item {{item.isTouchMove ? "active" : "" }}' wx:for="{{productList}}" wx:key="{{item.id}}"
             data-index="{{index}}" bindtouchstart="touchStart" bindtouchmove="touchmove">
-            <view class='label' bindtap="labelFun" data-id="{{item.id}}">
-                <checkbox-group bindchange="checkedBus" class="check-wrap">
+            <view class='label'>
+                <checkbox-group bindchange="selected" class="check-wrap" data-id="{{item.id}}">
                     <label>
-                        <checkbox class="check" value="{{i.busId}}" checked="{{checkAllStatus}}" />
+                        <checkbox class="check" value="{item.isSelect}}" checked="{{item.isSelect}}" />
                     </label>
                 </checkbox-group>
             </view>
@@ -34,9 +34,17 @@
                     <view class='price'>
                         <text>¥{{item.productPrice}}</text>
                     </view>
+                    <view class="nums" wx:if="{{isEdit}}">
+                        <view class="reduce" bindtap="reduce" data-id="{{item.id}}">-</view>
+                        <view class="num">
+                            <input type="number" class="number" data-id="{{item.id}}" bindinput="setNum" bindblur="setNum"
+                                value="{{item.productNum}}" />
+                        </view>
+                        <view class="add" bindtap="add" data-id="{{item.id}}">+</view>
+                    </view>
                 </view>
             </view>
-            <view class='del-btn' bindtap='delItemFun' data-item="{{item}}">
+            <view class='del-btn' bindtap='delItem' data-index="{{index}}" data-id="{{item.id}}">
                 删除
             </view>
         </view>
@@ -44,22 +52,20 @@
     <view class='bottom' style='height:10vh'>
         <view class='left'>
             <view class='text'>
-                <checkbox-group bindchange="selectAll" class="check-wrap">
+                <checkbox-group bindchange="checkedAll" class="check-wrap" style="margin-left: 32rpx;">
                     <label class="checkbox">
-                        <checkbox value="{{currentShop.shopId}}" checked="{{currentShop.checked}}" />
+                        <checkbox value="{{selectAllStatus}}" checked="{{selectAllStatus}}" />
                     </label>
                 </checkbox-group>
                 <text style='padding-left:10px;'>全选</text>
             </view>
-            <view class='total-price' wx:if="{{!isEdit}}">
+            <view class='total-price'>
                 合计:<text style='color:#ff5f19;margin-right:10px;'>￥{{totalPrice}}</text>
             </view>
         </view>
-        <view class='{{totalPrice>0.1?"right":"right prohibit"}}' bindtap="closeFun" wx:if="{{!isEdit}}">
-            结算({{allNums}})
+        <view class='{{totalPrice>0.1?"right":"right prohibit"}}' bindtap="toPay">
+            结算({{allNum}})
         </view>
-        <view class='{{totalPrice>0.1?"right":"right prohibit"}}' bindtap="delFun" wx:if="{{isEdit}}">
-            删除
-        </view>
+
     </view>
 </scroll-view>

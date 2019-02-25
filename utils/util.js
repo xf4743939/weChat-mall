@@ -47,6 +47,19 @@ function showMsg(res) {
   return true
 }
 
+function showTipMsg(title, icon = "none", callback) {
+  wx.showToast({
+    title: title,
+    icon: icon,
+    success: function () {
+      typeof callback == "function" && callback()
+    }
+  })
+  return false
+}
+
+
+
 /** 
  * 清楚全局 保存的活动类型 
  **/
@@ -77,7 +90,7 @@ function requestInfo(code, callback, result) {
       industryCode: app.globalData.style
     },
     success(res2) {
-   
+
       // console.log(res2)
       if (res2.data.code === 0) { //开发时关闭注释
         const data = res2.data.data
@@ -88,7 +101,7 @@ function requestInfo(code, callback, result) {
         wx.setStorageSync('phone', data.member && data.member.phone || ''); //开发时关闭注释
         wx.setStorageSync('memberId', data.member && data.member.id); //开发时关闭注释 
         wx.setStorageSync('appid', app.globalData.appid);
-  
+
         if (callback) callback(res2)
       } else {
         wx.showModal({
@@ -170,5 +183,6 @@ module.exports = {
   showErrMsg: showErrMsg,
   showMsg: showMsg,
   clearActivityStatus: clearActivityStatus,
-  login
+  login,
+  showTipMsg
 }
