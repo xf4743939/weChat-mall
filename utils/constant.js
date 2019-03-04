@@ -1,7 +1,7 @@
 // const http = 'https://mall.deeptel.com.cn'; //测试环境
 
 const http = `https://nbmall.deeptel.com.cn`; //堡垒环境
-
+const http2 = `https://wx.yogalt.com/api/`; //github(https://github.com/FZliweiliang/wechat-app-mall/blob/master/app.js)
 
 //授权登录
 const auth = http + `/pageApplet/79B4DE7C/appletAuth`;
@@ -22,9 +22,17 @@ const shopCartOrder = http + `/shopCartApplet/79B4DE7C/shopCartOrder`;
 //获取短信验证码
 const getValCode = http + `/memberBuyApplet/79B4DE7C/getValCode`;
 //绑定手机号
-const bindPhone = http + `/memberBuyApplet/79B4DE7C/bindPhone`
+const bindPhone = http + `/memberBuyApplet/79B4DE7C/bindPhone`;
 // 获取所有国家区号列表
-const areaPhoneList = http + `/memberBuyApplet/79B4DE7C/areaPhoneList`
+const areaPhoneList = http + `/memberBuyApplet/79B4DE7C/areaPhoneList`;
+// 获取默认城市地址
+const defaultCity = http2 + `v1/user/defaultCity`;
+// 获取城市列表
+const cityList = http2 + `v1/user/cityList`;
+// 增加城市
+const addCity = http2 + `v1/user/addCity`;
+//编辑城市
+const editCity = http2 + `v1/user/editCity`;
 
 module.exports = {
     auth,
@@ -37,5 +45,9 @@ module.exports = {
     shopCartOrder,
     getValCode,
     bindPhone,
-    areaPhoneList
+    areaPhoneList,
+    defaultCity,
+    cityList,
+    addCity,
+    editCity
 }

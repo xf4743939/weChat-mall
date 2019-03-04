@@ -41,7 +41,7 @@ Page({
       const phone = wx.getStorageSync('phone') || ""
       let url = "";
       url = !phone ? `/pages/bindPhone/bindPhone` : `/pages/shop_list/shop_list`
-      wx.navigateTo({
+      wx.reLaunch({
         url: url,
       })
     })

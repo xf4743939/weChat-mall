@@ -6,6 +6,7 @@ App({
   globalData: {
     userInfo: null, // 用户信息
     busId: 4856,
+    openId: "",
     appid: "wxea7b6b0b33eba425",
     style: 4,
     keyword: "", //搜素字段

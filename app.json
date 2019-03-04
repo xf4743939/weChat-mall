@@ -8,8 +8,9 @@
     "pages/my/my",
     "pages/search/search",
     "pages/orderDetails/orderDetails",
-    "pages/bindPhone/bindPhone"
-
+    "pages/bindPhone/bindPhone",
+    "pages/addressList/addressList",
+    "pages/addressAdd/addressAdd"
   ],
   "tabBar": {
     "color": "#7c8085",

@@ -24,18 +24,18 @@
                 收货地址
             </view>
         </view>
-        <navigator hover-class="none" url="/pages/addressList/index?type=1" class='address'>
+        <navigator hover-class="none" url="/pages/addressList/addressList?type=1" class='address'>
             <view class='left'>
                 <view>{{address.mobile}} {{address.name}} 收</view>
                 <view>{{address.city[0]}} {{address.city[1]}} {{address.city[2]}} {{address.detailed}}</view>
             </view>
-          
+
         </navigator>
         <view class='title' style='border-top:1px solid #dedede;'>
             <view class='left'>
                 发票信息
             </view>
-    
+
         </view>
         <!-- <view class='title'>
             <view class='left'>

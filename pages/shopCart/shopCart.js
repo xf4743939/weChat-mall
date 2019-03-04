@@ -304,7 +304,7 @@ Page({
    * 去结算 
    */
   toPay() {
-    debugger
+    
     let that = this,
       carList = this.data.productList,
       ids = [],

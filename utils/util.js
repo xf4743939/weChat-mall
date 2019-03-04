@@ -97,6 +97,11 @@ function requestInfo(code, callback, result) {
         if (!data) {
           return
         }
+    
+        //保存oppenid
+        app.globalData.openId = data.openId;
+        wx.setStorageSync('openid', data.openId)
+  
         //登录成功
         wx.setStorageSync('phone', data.member && data.member.phone || ''); //开发时关闭注释
         wx.setStorageSync('memberId', data.member && data.member.id); //开发时关闭注释 
@@ -140,15 +145,19 @@ function login(callback, result) {
           var code = res.code;
 
           if (result) {
+
             requestInfo(code, callback, result.detail)
           } else {
             wx.getSetting({
               success(res2) {
+
                 // console.log(res2)
                 // console.log(res2.authSetting['scope.userInfo'])
                 if (res2.authSetting['scope.userInfo']) {
                   wx.getUserInfo({
                     success(res3) {
+                      app.globalData.userInfo = res3.userInfo
+
                       // console.log(res3)
                       requestInfo(code, callback, res3)
                     },
